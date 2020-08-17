@@ -1,10 +1,12 @@
 import psycopg2
+import peewee
 
 def con_db():
 	con = psycopg2.connect(
-		database="online_store",
+		database="store_db",
 		user="postgres",
 		password="dkflbr",
-		host="localhost"
+		host="onlinestore_postgres_1"
 		)
-	return con;
+	return con
+

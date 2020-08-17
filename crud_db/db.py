@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2.errors import CheckViolation, ForeignKeyViolation
 
-from connect_db import con_db
+from crud_db.connect_db import con_db
 
 
 def save_cart():

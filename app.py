@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort, make_response, request
 
-import db
+import crud_db.db as db
 app = Flask(__name__)
 
 @app.errorhandler(404)
@@ -70,5 +70,5 @@ def delete_cart_item(cart_id, item_id):
 	return jsonify({'error': 'Cart_item not found'})
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, host='0.0.0.0', port=5000)
 
