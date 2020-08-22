@@ -1,6 +1,6 @@
 import peewee
-from orm_db.models import *
 from psycopg2.errors import CheckViolation
+from orm_db.models import *
 
 def init_db():
 	try:
