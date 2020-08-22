@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2.errors import CheckViolation, ForeignKeyViolation
 
-from crud_db.connect_db import con_db
+from crud_db.test_connect_db import con_db
 
 
 def save_cart():
@@ -14,7 +14,8 @@ def save_cart():
 	con.commit()
 	cur.close()
 	con.close()
-	return int(saved_cart[0])
+	cart_id = int(saved_cart[0])
+	return {'id': cart_id, 'items': []}
 	
 
 def save_item(item):
@@ -38,7 +39,12 @@ def save_item(item):
 		return False
 	cur.close()
 	con.close()
-	return saved_item
+	item_dict = {}
+	item_dict['id'] = saved_item[0]
+	item_dict['product'] = saved_item[1]
+	item_dict['quantity'] = saved_item[2]
+	item_dict['cart_id'] = saved_item[3]
+	return item_dict
 
 
 def check_cart(cart_id):
@@ -51,7 +57,9 @@ def check_cart(cart_id):
 	con.commit()
 	cur.close()
 	con.close()
-	return cart
+	if cart:
+		return True
+	return False
 
 
 def remove_item(item_id):
@@ -73,6 +81,16 @@ def get_cart(cart_id):
 	cur.execute(
 		"SELECT * FROM cart_item where cart_id=%(cart_id)s", {'cart_id': cart_id}
 		)
-	cart_items=cur.fetchall()
+	cart=cur.fetchall()
+	cart_items = []
+	for item in cart:
+		cart_item = {}
+		cart_item['id'] = item[0]
+		cart_item['product'] = item[1]
+		cart_item['quantity'] = item[2]
+		cart_item['cart_id'] = item[3]
+		cart_items.append(cart_item)
+	return {'id': cart_id,
+			'items': cart_items}
 	return cart_items
-
+	
