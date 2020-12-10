@@ -5,6 +5,7 @@ def con_db():
 		"store_db",
 		user="postgres",
 		password="dkflbr",
-		host="onlinestore_postgres_1"
+		#host="onlinestore_postgres_1"
+		host="localhost"
 		)
 	return dbhandle

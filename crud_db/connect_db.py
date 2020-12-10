@@ -2,10 +2,13 @@ import psycopg2
 
 def con_db():
 	con = psycopg2.connect(
-		database="store_db",
+		database="online_store",
 		user="postgres",
 		password="dkflbr",
-		host="onlinestore_postgres_1"
+		host="localhost",
 		)
 	return con
+
+
+#host="onlinestore_postgres_1"
 
